@@ -26,4 +26,43 @@ License: GPLv2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+/*
+ *	ACTIVATION
+ */
+
+register_activation_hook( __FILE__, 'prefix_plugin_name_activate' );	// CHANGE PREFIX!!
+
+function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
+    // Check for WordPress version compatibility
+    if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {// UPDATE VERSION
+
+            //SEND ALERT TO USER ATTEMPTING TO ACTIVATE
+
+            deactivate_plugins( basename(__FILE__ ) );  //Deactivation
+    }
+
+	$prefix_plugin_name_options = array(	// CHANGE PREFIX!!
+		//	OPTIONS GO HERE
+	);
+	update_option( 'prefix_plugin_name_options', $prefix_plugin_name_options );	//	CHANGE PREFIX!!
+	
+    //	DO MORE STUFF HERE
+}
+
+/*
+ *	DEACTIVATION
+ */
+
+ register_deactivation_hook( __FILE__,'prefix_plugin_name_deactivate' );	//	CHANGE PREFIX!!
+
+ function prefix_plugin_name_deactivate(){	// CHANGE PREFIX!!
+ 	// DO STUFF HERE
+ }
+
+/*
+ *	MORE PLUGIN CODE
+ */
+
+
+
 ?>
