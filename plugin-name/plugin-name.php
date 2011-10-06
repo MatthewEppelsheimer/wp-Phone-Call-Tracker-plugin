@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Plugin Name Here
-Plugin URI: http://example.com/wordpress-plugins/my-plugin
+Plugin URI: http://rocketlift.com/wordpress-plugins/my-plugin
 Description: A brief description of the plugin here
 Version: 1.0
-Author: Author's Name
-Author URI: http://example.com
+Author: Rocket Lift Incorporated
+Author URI: http://rocketlift.com
 License: GPLv2
 */
 
@@ -30,9 +30,9 @@ License: GPLv2
  *	ACTIVATION
  */
 
-register_activation_hook( __FILE__, 'prefix_plugin_name_activate' );	// CHANGE PREFIX!!
+register_activation_hook( __FILE__, 'rli_mle_plugin_name_activate' );	// CHANGE PREFIX!!
 
-function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
+function rli_mle_name_activate() {	//	CHANGE PREFIX!!
     // Check for WordPress version compatibility
     if ( version_compare( get_bloginfo( 'version' ), '3.3', '<' ) ) {// UPDATE VERSION
 
@@ -41,10 +41,10 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
             deactivate_plugins( basename(__FILE__ ) );  //Deactivation
     }
 
-	$prefix_plugin_name_options = array(	// CHANGE PREFIX!!
+	$rli_mle_name_options = array(	// CHANGE PREFIX!!
 		//	OPTIONS GO HERE
 	);
-	update_option( 'prefix_plugin_name_options', $prefix_plugin_name_options );	//	CHANGE PREFIX!!
+	update_option( 'rli_mle_name_options', $rli_mle_name_options );	//	CHANGE PREFIX!!
 	
     //	DO MORE STUFF HERE
 }
@@ -53,9 +53,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *	DEACTIVATION
  */
 
- register_deactivation_hook( __FILE__,'prefix_plugin_name_deactivate' );	//	CHANGE PREFIX!!
+ register_deactivation_hook( __FILE__,'rli_mle_name_deactivate' );	//	CHANGE PREFIX!!
 
- function prefix_plugin_name_deactivate(){	// CHANGE PREFIX!!
+ function rli_mle_name_deactivate(){	// CHANGE PREFIX!!
  	// DO STUFF HERE
  }
 
@@ -63,9 +63,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *  PLUGINS_LOADED HOOK
  */
 
- add_action('plugins_loaded', 'prefix_plugin_name_plugin_setups' );    //  CHANGE PREFIX!!
+ add_action('plugins_loaded', 'rli_mle_name_plugin_setups' );    //  CHANGE PREFIX!!
 
- function prefix_plugin_name_plugin_setups(){   //  CHANGE PREFIX!
+ function rli_mle_name_plugin_setups(){   //  CHANGE PREFIX!
      // WordPress hasn't fully loaded yet.
      // DO PLUGINS_LOADED STUFF HERE.
  }
@@ -74,9 +74,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *  INIT HOOK
  */
 
- add_action('init', 'prefix_plugin_name_init' );    //  CHANGE PREFIX!!
+ add_action('init', 'rli_mle_name_init' );    //  CHANGE PREFIX!!
 
- function prefix_plugin_name_init(){   //  CHANGE PREFIX!
+ function rli_mle_name_init(){   //  CHANGE PREFIX!
      // WordPress is loaded now.
      // DO STUFF HERE
  }
@@ -86,9 +86,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *  ADMIN_MENU HOOK
  */
 
- add_action('admin_menu', 'prefix_plugin_name_admin_menu' );    //  CHANGE PREFIX!!
+ add_action('admin_menu', 'rli_mle_name_admin_menu' );    //  CHANGE PREFIX!!
 
- function prefix_plugin_name_admin_menu(){   //  CHANGE PREFIX!
+ function rli_mle_name_admin_menu(){   //  CHANGE PREFIX!
      // Called when in the admin section.
      // DO ADMIN MENU SETUP AND OTHER BACKEND WORK HERE.
  }
@@ -98,9 +98,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *  TEMPLATE_REDIRECT HOOK
  */
 
- add_action('template_redirect', 'prefix_plugin_name_page_setups' );    //  CHANGE PREFIX!!
+ add_action('template_redirect', 'rli_mle_name_page_setups' );    //  CHANGE PREFIX!!
 
- function prefix_plugin_name_page_setups(){   //  CHANGE PREFIX!
+ function rli_mle_name_page_setups(){   //  CHANGE PREFIX!
      // WordPress now knows what page we're viewing.
      // This only happens in the front-end.
      // DO FRONT-END PAGE VIEW-SPECIFIC STUFF HERE.
@@ -111,9 +111,9 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  *  WP_HEAD HOOK
  */
 
- add_action('wp_head', 'prefix_plugin_name_wp_head' );    //  CHANGE PREFIX!!
+ add_action('wp_head', 'rli_mle_name_wp_head' );    //  CHANGE PREFIX!!
 
- function prefix_plugin_name_wp_head(){   //  CHANGE PREFIX!
+ function rli_mle_name_wp_head(){   //  CHANGE PREFIX!
      // WordPress is now compiling information to appear before the <body> tag.
      // DO STUFF TO PUT ANYTHING NECESSARY IN THE HEAD TAG HERE.
  }
