@@ -60,6 +60,66 @@ function prefix_plugin_name_activate() {	//	CHANGE PREFIX!!
  }
 
 /*
+ *  PLUGINS_LOADED HOOK
+ */
+
+ add_action('plugins_loaded', 'prefix_plugin_name_plugin_setups' );    //  CHANGE PREFIX!!
+
+ function prefix_plugin_name_plugin_setups(){   //  CHANGE PREFIX!
+     // WordPress hasn't fully loaded yet.
+     // DO PLUGINS_LOADED STUFF HERE.
+ }
+
+/*
+ *  INIT HOOK
+ */
+
+ add_action('init', 'prefix_plugin_name_init' );    //  CHANGE PREFIX!!
+
+ function prefix_plugin_name_init(){   //  CHANGE PREFIX!
+     // WordPress is loaded now.
+     // DO STUFF HERE
+ }
+
+
+/*
+ *  ADMIN_MENU HOOK
+ */
+
+ add_action('admin_menu', 'prefix_plugin_name_admin_menu' );    //  CHANGE PREFIX!!
+
+ function prefix_plugin_name_admin_menu(){   //  CHANGE PREFIX!
+     // Called when in the admin section.
+     // DO ADMIN MENU SETUP AND OTHER BACKEND WORK HERE.
+ }
+
+
+/*
+ *  TEMPLATE_REDIRECT HOOK
+ */
+
+ add_action('template_redirect', 'prefix_plugin_name_page_setups' );    //  CHANGE PREFIX!!
+
+ function prefix_plugin_name_page_setups(){   //  CHANGE PREFIX!
+     // WordPress now knows what page we're viewing.
+     // This only happens in the front-end.
+     // DO FRONT-END PAGE VIEW-SPECIFIC STUFF HERE.
+ }
+
+
+/*
+ *  WP_HEAD HOOK
+ */
+
+ add_action('wp_head', 'prefix_plugin_name_wp_head' );    //  CHANGE PREFIX!!
+
+ function prefix_plugin_name_wp_head(){   //  CHANGE PREFIX!
+     // WordPress is now compiling information to appear before the <body> tag.
+     // DO STUFF TO PUT ANYTHING NECESSARY IN THE HEAD TAG HERE.
+ }
+
+
+/*
  *	MORE PLUGIN CODE
  */
 
