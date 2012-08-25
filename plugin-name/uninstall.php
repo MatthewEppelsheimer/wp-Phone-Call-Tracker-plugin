@@ -4,8 +4,7 @@
 if( !defined( 'WP_UNINSTALL_PLUGIN')  )	exit ();
 
 // Delete option from options table
-delete_option( 'rli_mle__name_options' );	// CHANGE PREFIX!
+delete_option( 'prefix_options' );
 
 // REMOVE ANY ADDITIONAL OPTIONS AND TABLES
 
-?>
