@@ -30,8 +30,6 @@ License: GPLv2
  *	ACTIVATION
  */
 
-register_activation_hook( __FILE__, 'prefix_activate' );	
-
 function prefix_activate() {	
     // Check for WordPress version compatibility
     if ( version_compare( get_bloginfo( 'version' ), '3.4', '<' ) ) {
@@ -49,56 +47,54 @@ function prefix_activate() {
     //	DO MORE STUFF HERE
 }
 
+register_activation_hook( __FILE__, 'prefix_activate' );	
+
 /*
  *	DEACTIVATION
  */
-
- register_deactivation_hook( __FILE__,'prefix_deactivate' );	
 
  function prefix_deactivate(){	
  	// DO STUFF HERE
  }
 
+ register_deactivation_hook( __FILE__,'prefix_deactivate' );	
+
 /*
  *  PLUGINS_LOADED HOOK
  */
-
- add_action('plugins_loaded', 'prefix_plugin_setups' );    
 
  function prefix_plugin_setups(){   
      // WordPress hasn't fully loaded yet.
      // DO PLUGINS_LOADED STUFF HERE.
  }
 
+ add_action('plugins_loaded', 'prefix_plugin_setups' );    
+
 /*
  *  INIT HOOK
  */
-
- add_action('init', 'prefix_init' );    
 
  function prefix_init(){   
      // WordPress is loaded now.
      // DO STUFF HERE
  }
 
+ add_action('init', 'prefix_init' );    
 
 /*
  *  ADMIN_MENU HOOK
  */
-
- add_action('admin_menu', 'prefix_admin_menu' );    
 
  function prefix_admin_menu(){   
      // Called when in the admin section.
      // DO ADMIN MENU SETUP AND OTHER BACKEND WORK HERE.
  }
 
+ add_action('admin_menu', 'prefix_admin_menu' );    
 
 /*
  *  TEMPLATE_REDIRECT HOOK
  */
-
- add_action('template_redirect', 'prefix_page_setups' );    
 
  function prefix_page_setups(){   
      // WordPress now knows what page we're viewing.
@@ -106,22 +102,21 @@ function prefix_activate() {
      // DO FRONT-END PAGE VIEW-SPECIFIC STUFF HERE.
  }
 
+ add_action('template_redirect', 'prefix_page_setups' );    
 
 /*
  *  WP_HEAD HOOK
  */
-
- add_action('wp_head', 'prefix_wp_head' );    
 
  function prefix_wp_head(){   
      // WordPress is now compiling information to appear before the <body> tag.
      // DO STUFF TO PUT ANYTHING NECESSARY IN THE HEAD TAG HERE.
  }
 
+ add_action('wp_head', 'prefix_wp_head' );    
 
 /*
  *	MORE PLUGIN CODE
  */
-
 
 
