@@ -81,84 +81,96 @@ function rlisl_init() {
 
 add_action( 'init', 'rlisl_init' );    
 
+
+function rlisl_admin_init() {
+	wp_register_script( 'rlisl-settings-script', plugins_url( '/js/settings-page.js', __FILE__ ), array( 'jquery' ) );
+	wp_enqueue_script( 'rlisl-settings-script' );
+}
+
+add_action( 'admin_init', 'rlisl_admin_init' );
+
 /*
  *  ADMIN_MENU HOOK
  */
 
-function rlisl_admin_menu() {   
+function rlisl_admin_menu() {
 	// Called when in the admin section.
-	add_submenu_page('options-general.php', 'Rocket Lift Call Tracker', 'Sensor Logs', 'manage_options', 'rli-sensor-logs', function(){
-		if ( ! current_user_can( 'manage_options' ) ) {  
-    		wp_die('You do not have sufficient permissions to access this page.');  
-		}
-		if ( isset( $_POST["update_settings"] ) ) {
-			// Do the saving
-			
-			$goog_code_out = esc_attr( $_POST["goog_code_out"] );
-			$goog_code_out = (bool)$goog_code_out;
-			update_option( 'rlisl_code_out', $goog_code_out );
-			
-			$goog_man_code = esc_attr( $_POST["goog_man_code"] );
-			$goog_man_code = (bool)$goog_man_code;
-			update_option( 'rlisl_man_code', $goog_man_code );
-			
-			$con_id = esc_attr( $_POST["con_id"] );
-			
-			// validation 
-			if ( ! preg_match( '/[^0-9]/', $con_id ) ) {
-				update_option( 'rlisl_con_id', $con_id );
-			} else {
-				$con_id = get_option( 'rlisl_con_id' );
-			}
-			
-			$con_label = esc_attr( $_POST["con_label"] );
-			
-			// validation
-			if ( ! preg_match( '/[^a-zA-Z\d]/', $con_label ) ) {
-				update_option( 'rlisl_con_label', $con_label );
-			} else {
-				$con_label = get_option( 'rlisl_con_label' );
-			}
-			
-			$goog_remarketing = esc_attr( $_POST["goog_remarketing"] );
-			$goog_remarketing = (bool)$goog_remarketing;
-			update_option( 'rlisl_goog_mark', $goog_remarketing );
-			
+	add_submenu_page('options-general.php', 'Rocket Lift Call Tracker', 'Sensor Logs', 'manage_options', 'rli-sensor-logs', 'rlisl_setting_page' ); 
+}
+
+function rlisl_setting_page() {
+	if ( ! current_user_can( 'manage_options' ) ) {  
+		wp_die('You do not have sufficient permissions to access this page.');  
+	}
+	if ( isset( $_POST["update_settings"] ) ) {
+		// Do the saving
+		
+		$goog_code_out = esc_attr( $_POST["goog_code_out"] );
+		$goog_code_out = (bool)$goog_code_out;
+		update_option( 'rlisl_code_out', $goog_code_out );
+		
+		$goog_man_code = esc_attr( $_POST["goog_man_code"] );
+		$goog_man_code = (bool)$goog_man_code;
+		update_option( 'rlisl_man_code', $goog_man_code );
+		
+		$con_id = esc_attr( $_POST["con_id"] );
+		
+		// validation 
+		if ( ! preg_match( '/[^0-9]/', $con_id ) ) {
+			update_option( 'rlisl_con_id', $con_id );
 		} else {
 			$con_id = get_option( 'rlisl_con_id' );
-			$con_label = get_option( 'rlisl_con_label' );
-			$goog_remarketing = get_option( 'rlisl_goog_mark' );
 		}
-		?>
-		<div class="wrap">  
-		  <?php screen_icon('themes'); ?> <h2>Sensor Logs</h2>
-		</div>
- 
-        <form method="POST" action="">
-        	<label for="goog_code_out">Enable Google Code Output:</label>
-        	<input type="checkbox" name="goog_code_out" value="Y" <?php if($goog_code_out){echo 'checked';}?>/>
-        	</br>
-        	<label for="goog_man_code">Manual Output Code:</label>
-        	<input type="checkbox" name="goog_man_code" value="Y" <?php if($goog_man_code){echo 'checked';}?>/>
-        	</br>
-        	
-            <label for="con_id">Google Conversion ID:</label> 
-            <input type="text" name="con_id" size="25" value="<?php echo $con_id; ?>" />
-            </br>
-            <label for="con_label">Google Conversion Label:</label> 
-            <input type="text" name="con_label" size="25" value="<?php echo $con_label; ?>" />
-            </br>
-            <label for="goog_marketing">Google Remarketing Only:</label>
-            <input type="checkbox" name="goog_remarketing" value="Y" <?php if($goog_remarketing){echo 'checked';}?>/>
-            
-            <input type="hidden" name="update_settings" value="Y" />
-		    <p>
-				<input type="submit" value="Save settings" class="button-primary"/>
-			</p>
-		</form>
-    </div>
-		<?php
-	});
+		
+		$con_label = esc_attr( $_POST["con_label"] );
+		
+		// validation
+		if ( ! preg_match( '/[^a-zA-Z\d]/', $con_label ) ) {
+			update_option( 'rlisl_con_label', $con_label );
+		} else {
+			$con_label = get_option( 'rlisl_con_label' );
+		}
+		
+		$goog_remarketing = esc_attr( $_POST["goog_remarketing"] );
+		$goog_remarketing = (bool)$goog_remarketing;
+		update_option( 'rlisl_goog_mark', $goog_remarketing );
+		
+	} else {
+		$goog_code_out = get_option( 'rlisl_code_out' );
+		$goog_man_code = get_option( 'rlisl_man_code' );
+		$con_id = get_option( 'rlisl_con_id' );
+		$con_label = get_option( 'rlisl_con_label' );
+		$goog_remarketing = get_option( 'rlisl_goog_mark' );
+	}
+	?>
+	<div class="wrap">  
+	  <?php screen_icon('themes'); ?> <h2>Sensor Logs</h2>
+	</div>
+
+    <form method="POST" action="">
+    	<label for="goog_code_out">Enable Google Code Output:</label>
+    	<input type="checkbox" name="goog_code_out" value="Y" <?php if($goog_code_out){echo 'checked';}?>/>
+    	</br>
+    	<label for="goog_man_code">Manual Output Code:</label>
+    	<input <?php if($goog_code_out){echo 'disabled';}?> type="checkbox" name="goog_man_code" value="Y" <?php if($goog_man_code){echo 'checked';}?>><span class="description">Check this box if your theme or another plugin adds your Google tracking code. We will not output the code a second time, but still enable links to call the goog_report_conversion() when someone clicks a phone number link or button.</span></input>
+    	</br>
+    	
+        <label for="con_id">Google Conversion ID:</label> 
+        <input type="text" name="con_id" size="25" value="<?php echo $con_id; ?>" />
+        </br>
+        <label for="con_label">Google Conversion Label:</label> 
+        <input type="text" name="con_label" size="25" value="<?php echo $con_label; ?>" />
+        </br>
+        <label for="goog_marketing">Google Remarketing Only:</label>
+        <input type="checkbox" name="goog_remarketing" value="Y" <?php if($goog_remarketing){echo 'checked';}?>/>
+        
+        <input type="hidden" name="update_settings" value="Y" />
+	    <p>
+			<input type="submit" value="Save settings" class="button-primary"/>
+		</p>
+	</form>
+</div>
+<?php
 }
 
 add_action( 'admin_menu', 'rlisl_admin_menu' );    	
