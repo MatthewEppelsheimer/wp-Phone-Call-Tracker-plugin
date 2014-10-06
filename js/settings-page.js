@@ -4,8 +4,10 @@ jQuery( document ).ready(function(){
 		var me = jQuery("input[name='goog_code_out']");
 		var dis = jQuery(me).prop('checked');
 		
-		
-		toggle_input( 'goog_man_code', dis );
+		dis = !dis;
+		toggle_input( 'con_id', dis );
+		toggle_input( 'con_label', dis );
+		toggle_input( 'goog_remarketing', dis );
 	});
 });
 
