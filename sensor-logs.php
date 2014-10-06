@@ -71,15 +71,45 @@ function rlisl_plugin_setups() {
 add_action( 'plugins_loaded', 'rlisl_plugin_setups' );    
 
 /*
- *  INIT HOOK
+ *  HEADER HOOK
  */
 
-function rlisl_init() {   
-     // WordPress is loaded now.
-     // DO STUFF HERE
+function rlisl_header() { 
+	if ( ! get_option( 'rlisl_code_out' ) ) {
+		return;
+	}
+?>
+<script type="text/javascript">
+  /* <![CDATA[ */
+  goog_snippet_vars = function() {
+    var w = window;
+    w.google_conversion_id = "<?php echo get_option( 'rlisl_con_id' ); ?>";
+    w.google_conversion_label = "<?php echo get_option( 'rlisl_con_label' ); ?>";
+    w.google_remarketing_only = <?php echo ( get_option( 'rlisl_goog_mark' ) ) ? 'true': 'false'; ?>;
+  }
+  goog_report_conversion = function(url) {
+    goog_snippet_vars();
+    window.google_conversion_format = "3";
+    window.google_is_call = true;
+    var opt = new Object();
+    opt.onload_callback = function() {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  }
+  var conv_handler = window['google_trackConversion'];
+  if (typeof(conv_handler) == 'function') {
+    conv_handler(opt);
+  }
 }
+/* ]]> */
+</script>
+<script type="text/javascript"
+  src="//www.googleadservices.com/pagead/conversion_async.js">
+</script>
 
-add_action( 'init', 'rlisl_init' );    
+<?php }
+add_action( 'wp_head', 'rlisl_header' ); 
 
 
 function rlisl_admin_init() {
@@ -188,7 +218,30 @@ function rlisl_page_setups() {
 add_action( 'template_redirect', 'rlisl_page_setups' );    
 
 /*
- *	MORE PLUGIN CODE
+ *	Shortcode  
  */
 
+function rlisl_phonenumber( $atts, $content = null ) {
+	$schema = '';
+	if ( isset( $atts['schema'] ) ) {
+		$schema = $atts['schema'];
+	}
+	
+	$phonenumber = preg_replace( '/\D/', '', $content );
+	
+	switch ( $schema ) {
+		case 'organization':
+		case 'organisation':
+			$out = '<div itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></div>';
+			break;
+		case 'person':
+			$out = '<div itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></div>';
+			break; 
+		default:
+			$out = '<a onclick="goog_report_conversion("tel:' . $phonenumber . '");" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
+			break;
+	} 
+	return $out;
+}
+add_shortcode( 'phonenumber', 'rlisl_phonenumber' );
 
