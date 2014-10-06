@@ -226,6 +226,8 @@ function rlisl_phonenumber( $atts, $content = null ) {
 	$schema = '';
 	if ( isset( $atts['schema'] ) ) {
 		$schema = $atts['schema'];
+	} else {
+		$schema = 'organization';
 	}
 	
 	$phonenumber = preg_replace( '/\D/', '', $content );
