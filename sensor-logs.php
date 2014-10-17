@@ -3,7 +3,7 @@
 Plugin Name: Sensor Logs
 Plugin URI: http://rocketlift.com/software/wordpress-plugins/my-plugin
 Description: A brief description of the plugin here
-Version: 1.0
+Version: 0.1.0
 Author: Rocket Lift Incorporated
 Author URI: http://rocketlift.com
 License: GPLv2
