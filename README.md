@@ -1,5 +1,5 @@
-# <$ Project or Business Name >
+# Phone Call Tracker
 
-__<$CanonicalProductionURL>__
+__Soon to be found at https://wordpress.org/plugins/phone-call-tracker/__
 
-For more information, see [the project's wiki](<$WikiURL>)
+If you would like to contribute, please go to https://github.com/rocketlift/wp-Phone-Call-Tracker-plugin
