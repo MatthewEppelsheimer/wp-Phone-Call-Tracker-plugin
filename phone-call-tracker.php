@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Sensor Logs
+Plugin Name: Phone Call Tracker
 Plugin URI: http://rocketlift.com/software/wordpress-plugins/my-plugin
-Description: A brief description of the plugin here
+Description: Tracks mobile phone calls initiated through a website click
 Version: 0.1.0
 Author: Rocket Lift Incorporated
 Author URI: http://rocketlift.com
@@ -30,7 +30,7 @@ License: GPLv2
  *	ACTIVATION
  */
 
-function rlisl_activate() {
+function pct_activate() {
     // Check for WordPress version compatibility
     if ( version_compare( get_bloginfo( 'version' ), '3.4', '<' ) ) {
 
@@ -39,43 +39,43 @@ function rlisl_activate() {
             deactivate_plugins( basename(__FILE__ ) );  //Deactivation
     }
 
-	$rlisl_options = array(	
+	$pct_options = array(	
 		//	OPTIONS GO HERE
 	);
-	update_option( 'rlisl_options', $rli_mle_name_options );	
+	update_option( 'pct_options', $rli_mle_name_options );	
 	
     //	DO MORE STUFF HERE
 }
 
-register_activation_hook( __FILE__, 'rlisl_activate' );	
+register_activation_hook( __FILE__, 'pct_activate' );	
 
 /*
  *	DEACTIVATION
  */
 
-function rlisl_deactivate() {	
+function pct_deactivate() {	
  	// DO STUFF HERE
 }
 
-register_deactivation_hook( __FILE__, 'rlisl_deactivate' );	
+register_deactivation_hook( __FILE__, 'pct_deactivate' );	
 
 /*
  *  PLUGINS_LOADED HOOK
  */
 
-function rlisl_plugin_setups() {   
+function pct_plugin_setups() {   
      // WordPress hasn't fully loaded yet.
      // DO PLUGINS_LOADED STUFF HERE.
 }
 
-add_action( 'plugins_loaded', 'rlisl_plugin_setups' );    
+add_action( 'plugins_loaded', 'pct_plugin_setups' );    
 
 /*
  *  HEADER HOOK
  */
 
-function rlisl_header() {
-	if ( ! get_option( 'rlisl_code_out' ) ) {
+function pct_header() {
+	if ( ! get_option( 'pct_code_out' ) ) {
 		return;
 	}
 ?>
@@ -83,9 +83,9 @@ function rlisl_header() {
   /* <![CDATA[ */
   goog_snippet_vars = function() {
     var w = window;
-    w.google_conversion_id = "<?php echo get_option( 'rlisl_con_id' ); ?>";
-    w.google_conversion_label = "<?php echo get_option( 'rlisl_con_label' ); ?>";
-    w.google_remarketing_only = <?php echo ( get_option( 'rlisl_goog_mark' ) ) ? 'true': 'false'; ?>;
+    w.google_conversion_id = "<?php echo get_option( 'pct_con_id' ); ?>";
+    w.google_conversion_label = "<?php echo get_option( 'pct_con_label' ); ?>";
+    w.google_remarketing_only = <?php echo ( get_option( 'pct_goog_mark' ) ) ? 'true': 'false'; ?>;
   }
   goog_report_conversion = function(url) {
     goog_snippet_vars();
@@ -109,35 +109,35 @@ function rlisl_header() {
 </script>
 
 <?php }
-add_action( 'wp_head', 'rlisl_header' ); 
+add_action( 'wp_head', 'pct_header' ); 
 
 
-function rlisl_admin_init() {
-	wp_register_script( 'rlisl-settings-script', plugins_url( '/js/settings-page.js', __FILE__ ), array( 'jquery' ) );
-	wp_enqueue_script( 'rlisl-settings-script' );
+function pct_admin_init() {
+	wp_register_script( 'pct-settings-script', plugins_url( '/js/settings-page.js', __FILE__ ), array( 'jquery' ) );
+	wp_enqueue_script( 'pct-settings-script' );
 }
 
-add_action( 'admin_init', 'rlisl_admin_init' );
+add_action( 'admin_init', 'pct_admin_init' );
 
 /*
  *  ADMIN_MENU HOOK
  */
 
-function rlisl_admin_menu() {
+function pct_admin_menu() {
 	// Called when in the admin section.
-	add_submenu_page('options-general.php', 'Rocket Lift Call Tracker', 'Sensor Logs', 'manage_options', 'rli-sensor-logs', 'rlisl_setting_page' ); 
+	add_submenu_page('options-general.php', __('Phone Call Tracker', 'phone-call-tracker'), __('Phone Call Tracker', 'phone-call-tracker'), 'manage_options', 'phone-call-tracker', 'pct_setting_page' ); 
 }
 
-function rlisl_setting_page() {
+function pct_setting_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {  
-		wp_die('You do not have sufficient permissions to access this page.');  
+		wp_die( __('You do not have sufficient permissions to access this page.', 'phone-call-tracker' ) );
 	}
 	if ( isset( $_POST["update_settings"] ) ) {
 		// Do the saving
 		
 		$goog_code_out = esc_attr( $_POST["goog_code_out"] );
 		$goog_code_out = (bool)$goog_code_out;
-		update_option( 'rlisl_code_out', $goog_code_out );
+		update_option( 'pct_code_out', $goog_code_out );
 		
 		if ( $goog_code_out ) {
 		
@@ -145,84 +145,84 @@ function rlisl_setting_page() {
 		
 			// validation 
 			if ( ! preg_match( '/[^0-9]/', $con_id ) ) {
-				update_option( 'rlisl_con_id', $con_id );
+				update_option( 'pct_con_id', $con_id );
 			} else {
-				$con_id = get_option( 'rlisl_con_id' );
+				$con_id = get_option( 'pct_con_id' );
 			}
 		
 			$con_label = esc_attr( $_POST["con_label"] );
 		
 			// validation
 			if ( ! preg_match( '/[^a-zA-Z\d]/', $con_label ) ) {
-				update_option( 'rlisl_con_label', $con_label );
+				update_option( 'pct_con_label', $con_label );
 			} else {
-				$con_label = get_option( 'rlisl_con_label' );
+				$con_label = get_option( 'pct_con_label' );
 			}
 		
 			$goog_remarketing = esc_attr( $_POST["goog_remarketing"] );
 			$goog_remarketing = (bool)$goog_remarketing;
-			update_option( 'rlisl_goog_mark', $goog_remarketing );
+			update_option( 'pct_goog_mark', $goog_remarketing );
 		} else {
-			$con_id = get_option( 'rlisl_con_id' );
-			$con_label = get_option( 'rlisl_con_label' );
-			$goog_remarketing = get_option( 'rlisl_goog_mark' );
+			$con_id = get_option( 'pct_con_id' );
+			$con_label = get_option( 'pct_con_label' );
+			$goog_remarketing = get_option( 'pct_goog_mark' );
 		}
 	} else {
-		$goog_code_out = get_option( 'rlisl_code_out' );
-		$con_id = get_option( 'rlisl_con_id' );
-		$con_label = get_option( 'rlisl_con_label' );
-		$goog_remarketing = get_option( 'rlisl_goog_mark' );
+		$goog_code_out = get_option( 'pct_code_out' );
+		$con_id = get_option( 'pct_con_id' );
+		$con_label = get_option( 'pct_con_label' );
+		$goog_remarketing = get_option( 'pct_goog_mark' );
 	}
 	?>
 	<div class="wrap">  
-	  <?php screen_icon('themes'); ?> <h2>Sensor Logs</h2>
+	  <?php screen_icon('themes'); ?> <h2><?php echo __('Phone Call Tracker', 'phone-call-tracker');?></h2>
 	</div>
 
     <form method="POST" action="">
-    	<label for="goog_code_out">Enable Google Code Output:</label>
+    	<label for="goog_code_out"><?php echo __('Enable Google Code Output:', 'phone-call-tracker');?></label>
     	<input type="radio" name="goog_code_out" value="Y" <?php if($goog_code_out){echo 'checked';}?>/>
     	</br>
-    	<label>Manual Output Code:</label>
-    	<input type="Radio" name="goog_code_out" value="" <?php if(!$goog_code_out){echo 'checked';} ?>> <span class="description">Check this box if your theme or another plugin adds your Google tracking code. We will not output the code a second time, but still enable links to call the goog_report_conversion() when someone clicks a phone number link or button.</span></input>
+    	<label><?php echo __('Manual Output Code:', 'phone-call-tracker');?></label>
+    	<input type="Radio" name="goog_code_out" value="" <?php if(!$goog_code_out){echo 'checked';} ?>> <span class="description"><?php echo __('Check this box if your theme or another plugin adds your Google tracking code. We will not output the code a second time, but still enable links to call the goog_report_conversion() when someone clicks a phone number link or button.', 'phone-call-tracker');?></span></input>
     	</br>
     	
-        <label for="con_id">Google Conversion ID:</label> 
+        <label for="con_id"><?php echo __('Google Conversion ID:', 'phone-call-tracker');?></label> 
         <input <?php if(!$goog_code_out){echo 'disabled';}?> type="text" name="con_id" size="25" value="<?php echo $con_id; ?>" />
         </br>
-        <label for="con_label">Google Conversion Label:</label> 
+        <label for="con_label"><?php echo __('Google Conversion Label:', 'phone-call-tracker');?></label> 
         <input <?php if(!$goog_code_out){echo 'disabled';}?> type="text" name="con_label" size="25" value="<?php echo $con_label; ?>" />
         </br>
-        <label for="goog_marketing">Google Remarketing Only:</label>
+        <label for="goog_marketing"><?php echo __('Google Remarketing Only:', 'phone-call-tracker');?></label>
         <input <?php if(!$goog_code_out){echo 'disabled';}?> type="checkbox" name="goog_remarketing" value="Y" <?php if($goog_remarketing){echo 'checked';}?>/>
         
         <input type="hidden" name="update_settings" value="Y" />
 	    <p>
-			<input type="submit" value="Save settings" class="button-primary"/>
+			<input type="submit" value="<?php echo __('Save settings', 'phone-call-tracker'); ?>" class="button-primary"/>
 		</p>
 	</form>
 </div>
 <?php
 }
 
-add_action( 'admin_menu', 'rlisl_admin_menu' );    	
+add_action( 'admin_menu', 'pct_admin_menu' );    	
 
 /*
  *  TEMPLATE_REDIRECT HOOK
  */
 
-function rlisl_page_setups() {   
+function pct_page_setups() {   
      // WordPress now knows what page we're viewing.
      // This only happens in the front-end.
      // DO FRONT-END PAGE VIEW-SPECIFIC STUFF HERE.
 }
 
-add_action( 'template_redirect', 'rlisl_page_setups' );    
+add_action( 'template_redirect', 'pct_page_setups' );    
 
 /*
  *	Shortcode  
  */
 
-function rlisl_phonenumber( $atts, $content = null ) {
+function pct_phonenumber( $atts, $content = null ) {
 	$schema = '';
 	if ( isset( $atts['schema'] ) ) {
 		$schema = $atts['schema'];
@@ -246,5 +246,5 @@ function rlisl_phonenumber( $atts, $content = null ) {
 	}
 	return $out;
 }
-add_shortcode( 'phonenumber', 'rlisl_phonenumber' );
+add_shortcode( 'phonenumber', 'pct_phonenumber' );
 
