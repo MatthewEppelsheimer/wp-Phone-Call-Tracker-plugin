@@ -1,4 +1,4 @@
-$N.n.n
+0.1.0
 
 # == This ⤴︎ is the version number of this repository. == #
 #
@@ -16,15 +16,9 @@ $N.n.n
 
 # == Numbering Scheme & Method == #
 #
-# (default)
 #  * Method: manual
-#
-# (default)
 #  * Scheme: [SemVer](http://semver.org/)
 #
-# This may be different depending on the project. If we
-# can't use SemVer here, then specify the version-numbering
-# details here.
 
 
 # == Other File Locations == #
@@ -32,20 +26,6 @@ $N.n.n
 # These are the other locations where this version number is
 # defined in this project:
 #
-# (default for a theme project)
-#  * style.css
+#  * phone-call-tracker.php
 #
-# (default for a plugin project's)
-#  * the-plugin-name.php
-#
-# (default for a WordPress website project)
-#  * wp-content/site-specific-child-theme/style.css
-#  * wp-content/site-specific-plugin/site-specific-plugin.php
-#
-# (if this is the only location)
-#  * none
-#
-# When "incrementing version numbers" on this project, the
-# version numbers in these files must be updated to match,
-# either by hand or by build script.
 
