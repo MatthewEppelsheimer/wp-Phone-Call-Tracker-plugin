@@ -18,7 +18,7 @@ This plugin uses a simple settings page and shortcode to easily interface with a
 1. Install & activate the plugin through the \"Plugins\" menu in WordPress.
 1. Add the `[phonenumber]` shortcode to your content.
 
-== Configuration ==
+= Configuration =
 
 Go to the \"Settings > Phone Call Tracker\" menu.
 
@@ -27,9 +27,9 @@ To track clicks using Google Analytics
 1. Match the \"Conversion ID\", \"Conversion Label\", and the \"remarketing only\" settings to your Google AdWords configuration.
 1. Click \"Save Settings\"
 
-== Usage ==
+= Usage =
 
-Where ever you want your phone number to be shown and clickable, insert this shortcode into your content:
+Wherever you want your phone number to be shown and clickable, insert this shortcode into your content:
 
 `[phonenumber](555)-555-6789[/phonenumber]`
 
