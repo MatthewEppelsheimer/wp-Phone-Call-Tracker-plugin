@@ -235,10 +235,10 @@ function pct_phonenumber( $atts, $content = null ) {
 	switch ( $schema ) {
 		case 'organization':
 		case 'organisation':
-			$out = '<div itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></div>';
+			$out = '<span itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break;
 		case 'person':
-			$out = '<div itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></div>';
+			$out = '<span itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break; 
 		default:
 			$out = '<a onclick="goog_report_conversion("tel:' . $phonenumber . '");" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
