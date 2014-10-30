@@ -7,7 +7,7 @@ Stable tag:  ???
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Tracks mobile phone calls initiated through a website click via a nice shortcode
+Shortcode for rendering phone numbers in 'tel:' links, with Google Analyitcs tracking.
 
 == Description ==
 This plugin uses a simple settings page and shortcode to easily interface with an existing Google AdWords campaign. This allows you to track mobile phone calls from your site.
