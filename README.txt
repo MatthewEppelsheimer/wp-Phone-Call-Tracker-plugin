@@ -14,7 +14,9 @@ Shortcode for rendering phone numbers in 'tel:' links, with Google Analyitcs tra
 This plugin uses a simple settings page and shortcode to easily interface with an existing Google AdWords campaign. This allows you to track mobile phone calls from your site.
 
 == Installation ==
-Install & activate the plugin \"Phone Call Tracker\" through the \"Plugins\" menu in WordPress.
+
+1. Install & activate the plugin through the \"Plugins\" menu in WordPress.
+1. Add the `[phonenumber]` shortcode to your content.
 
 == Configuration ==
 
