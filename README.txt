@@ -12,19 +12,22 @@ Tracks mobile phone calls initiated through a website click via a nice shortcode
 == Description ==
 This plugin uses a simple settings page and shortcode to easily interface with an existing Google AdWords campaign. This allows you to track mobile phone calls from your site.
 
-
 == Installation ==
-1. Upload \"test-plugin.php\" to the \"/wp-content/plugins/\" directory.
-1. Activate the plugin \"Phone Call Tracker\" through the \"Plugins\" menu in WordPress.
-1. Go to the Settings > Phone Call Tracker menu
-1. It is suggested to \"Enable Google Code Output\"
-1. Enter the Conversion ID, Conversion Label, and chekc the remarketing only box based off your Google AdWords settings.
+Install & activate the plugin \"Phone Call Tracker\" through the \"Plugins\" menu in WordPress.
+
+== Configuration ==
+Go to the \"Settings > Phone Call Tracker\" menu.
+
+To track clicks using Google Analytics
+1. Choose \"Enable Google Code Output\"
+1. Match the \"Conversion ID\", \"Conversion Label\", and the \"remarketing only\" settings to your Google AdWords configuration.
 1. Click \"Save Settings\"
-1. Where ever you want your phone number used, insert the shortcode defined below
 
-== Shortcode ==
+== Usage ==
 
-* `[phonenumber](555)-555-6789[/phonenumber]` : creates a phone number link that allow mobile phone devices to call with a simple click 
+Where ever you want your phone number to be shown and clickable, insert this shortcode into your content:
+
+`[phonenumber](555)-555-6789[/phonenumber]`
 
 == Proposed Features ==
 1. Create native WordPress (non-Google dependant) Call Tracking support
