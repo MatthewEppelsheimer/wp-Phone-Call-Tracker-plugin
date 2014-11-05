@@ -11,7 +11,7 @@ Shortcode for rendering phone numbers in 'tel:' links, with Google Analyitcs tra
 
 == Description ==
 
-This plugin uses a simple settings page and shortcode to easily interface with an existing Google AdWords campaign. This allows you to track mobile phone calls from your site.
+This plugin uses a simple settings page and shortcode to easily interface with an existing Google AdWords campaign. This allows you to record instances of a conversion that you've set up in your Google Adwords account.
 
 == Installation ==
 

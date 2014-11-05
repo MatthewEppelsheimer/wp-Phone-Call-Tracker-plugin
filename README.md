@@ -1,4 +1,6 @@
-# Phone Call Tracker
+# Phone Call Tracker #
+
+A WordPress plugin that implements a shortcode for making rich `tel:` links that are tied to a Google Analytics account. See `README.txt` for more. 
 
 __Soon to be found at [https://wordpress.org/plugins/phone-call-tracker/](https://wordpress.org/plugins/phone-call-tracker/)__
 
