@@ -1,0 +1,20 @@
+
+# == Standardize line-endings == #
+*       text=auto
+
+# Note: if this attribute is enabled in an existing repository, any
+# text files containing CRLFs should be normalized. If they are not
+# they will be normalized the next time someone tries to change
+# them, causing unfortunate misattribution.
+# 
+# To prevent this from happening if you're adding this setting to an
+# existing repo, execute this from a clean working directory:
+#
+# 	$ rm .git/index     # Remove the index to force git to
+# 	$ git reset         # re-scan the working directory
+# 	$ git status        # Show files that will be normalized
+# 	$ git add -u
+# 	$ git add .gitattributes
+# 	$ git commit -m "Introduce end-of-line normalization"
+#
+
