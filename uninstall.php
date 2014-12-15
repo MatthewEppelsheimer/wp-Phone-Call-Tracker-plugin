@@ -1,7 +1,9 @@
 <?php
 
 // Exit if not called when uninstalling plugin
-if( !defined( 'WP_UNINSTALL_PLUGIN')  )	exit ();
+if( !defined( 'WP_UNINSTALL_PLUGIN')  ) {
+	exit ();
+}
 
 // Delete option from options table
 delete_option( 'prefix_options' );

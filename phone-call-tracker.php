@@ -3,13 +3,14 @@
 Plugin Name: Phone Call Tracker
 Plugin URI: http://rocketlift.com/software/wordpress-plugins/my-plugin
 Description: Tracks mobile phone calls initiated through a website click
-Version: 0.2.0
+Version: 0.3
 Author: Rocket Lift Incorporated
 Author URI: http://rocketlift.com
 License: GPLv2
+Text Domain: phone-call-tracker
 */
 
-/*  Copyright YEAR  AUTHOR  (email : you@example.com)
+/*  Copyright 2014 Rocket Lift (email : software@rocketlift.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -38,12 +39,6 @@ function pct_activate() {
 
             deactivate_plugins( basename(__FILE__ ) );  //Deactivation
     }
-
-	$pct_options = array(	
-		//	OPTIONS GO HERE
-	);
-	update_option( 'pct_options', $rli_mle_name_options );	
-	
     //	DO MORE STUFF HERE
 }
 
@@ -54,21 +49,14 @@ register_activation_hook( __FILE__, 'pct_activate' );
  */
 
 function pct_deactivate() {	
- 	// DO STUFF HERE
+ 	// Remove set options
+ 	delete_option( 'pct_con_id' );
+ 	delete_option( 'pct_con_label' );
+ 	delete_option( 'pct_goog_mark' );
+ 	delete_option( 'pct_code_out' );
 }
 
 register_deactivation_hook( __FILE__, 'pct_deactivate' );	
-
-/*
- *  PLUGINS_LOADED HOOK
- */
-
-function pct_plugin_setups() {   
-     // WordPress hasn't fully loaded yet.
-     // DO PLUGINS_LOADED STUFF HERE.
-}
-
-add_action( 'plugins_loaded', 'pct_plugin_setups' );    
 
 /*
  *  HEADER HOOK
@@ -207,23 +195,10 @@ function pct_setting_page() {
 add_action( 'admin_menu', 'pct_admin_menu' );    	
 
 /*
- *  TEMPLATE_REDIRECT HOOK
- */
-
-function pct_page_setups() {   
-     // WordPress now knows what page we're viewing.
-     // This only happens in the front-end.
-     // DO FRONT-END PAGE VIEW-SPECIFIC STUFF HERE.
-}
-
-add_action( 'template_redirect', 'pct_page_setups' );    
-
-/*
  *	Shortcode  
  */
 
 function pct_phonenumber( $atts, $content = null ) {
-	$schema = '';
 	if ( isset( $atts['schema'] ) ) {
 		$schema = $atts['schema'];
 	} else {
@@ -235,13 +210,13 @@ function pct_phonenumber( $atts, $content = null ) {
 	switch ( $schema ) {
 		case 'organization':
 		case 'organisation':
-			$out = '<span itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
+			$out = '<span itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break;
 		case 'person':
-			$out = '<span itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion("tel:' . $phonenumber . '");" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
+			$out = '<span itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break; 
 		default:
-			$out = '<a onclick="goog_report_conversion("tel:' . $phonenumber . '");" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
+			$out = '<a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
 			break;
 	}
 	return $out;

@@ -3,7 +3,7 @@ Contributors: RocketLift
 Tags: tracking, phone, shortcode, google
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag:  ??? 
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,9 @@ Wherever you want your phone number to be shown and clickable, insert this short
 1. Store phone numbers in database to allow for easy repetition
 
 == Changelog ==
+
+= 0.3 =
+* Misc. tweaks & fixes.
 
 = 0.2 =
 * Misc. tweaks & fixes.
