@@ -41,6 +41,9 @@ Wherever you want your phone number to be shown and clickable, insert this short
 
 == Changelog ==
 
+= 0.3.1 =
+* Change where Google's code is injected into pages.
+
 = 0.3 =
 * Misc. tweaks & fixes.
 
