@@ -3,7 +3,7 @@
 Plugin Name: Phone Call Tracker
 Plugin URI: http://rocketlift.com/software/wordpress-plugins/my-plugin
 Description: Tracks mobile phone calls initiated through a website click
-Version: 0.3
+Version: 0.3.1
 Author: Rocket Lift Incorporated
 Author URI: http://rocketlift.com
 License: GPLv2
