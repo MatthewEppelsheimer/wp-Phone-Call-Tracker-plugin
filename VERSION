@@ -1,4 +1,4 @@
-0.3
+0.3.1
 
 # == This ⤴︎ is the version number of this repository. == #
 #
@@ -27,6 +27,6 @@
 # defined in this project:
 #
 #  * phone-call-tracker.php
-#  * README.txt
+#  * README.txt (include changelog notes in this file)
 #
 
