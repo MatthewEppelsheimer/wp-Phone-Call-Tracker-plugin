@@ -3,7 +3,7 @@
 Plugin Name: Phone Call Tracker
 Plugin URI: http://rocketlift.com/software/wordpress-plugins/my-plugin
 Description: Tracks mobile phone calls initiated through a website click
-Version: 0.3
+Version: 0.3.2
 Author: Rocket Lift Incorporated
 Author URI: http://rocketlift.com
 License: GPLv2
@@ -71,7 +71,7 @@ function pct_header() {
   /* <![CDATA[ */
   goog_snippet_vars = function() {
     var w = window;
-    w.google_conversion_id = <?php echo get_option( 'pct_con_id' ); ?>;
+    w.google_conversion_id = "<?php echo get_option( 'pct_con_id' ); ?>";
     w.google_conversion_label = "<?php echo get_option( 'pct_con_label' ); ?>";
     w.google_remarketing_only = <?php echo ( get_option( 'pct_goog_mark' ) ) ? 'true': 'false'; ?>;
   }
@@ -97,7 +97,7 @@ function pct_header() {
 </script>
 
 <?php }
-add_action( 'wp_footer', 'pct_header' ); 
+add_action( 'wp_head', 'pct_header' ); 
 
 
 function pct_admin_init() {
@@ -210,13 +210,13 @@ function pct_phonenumber( $atts, $content = null ) {
 	switch ( $schema ) {
 		case 'organization':
 		case 'organisation':
-			// $out = '<span itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
+			$out = '<span itemscope itemtype="http://schema.org/Organization"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break;
 		case 'person':
-			// $out = '<span itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
+			$out = '<span itemscope itemtype="http://schema.org/Person"><a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" itemprop="telephone" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a></span>';
 			break; 
 		default:
-			// $out = '<a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
+			$out = '<a onclick="goog_report_conversion(\'tel:' . $phonenumber . '\');" class="hcard p-tel" href="tel:' . $phonenumber . '">' . $content . '</a>';
 			break;
 	}
 	return $out;
